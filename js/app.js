@@ -54,6 +54,21 @@ function ObtenerPlatillos() {
     const url = 'http://localhost:3000/Platillos';
     fetch(url)
         .then(respuesta => respuesta.json())
-        .then(resultado => console.log(resultado))
+        .then(resultado => mostrarPlatillos(resultado))
         .catch(error => console.log(error))
+}
+
+function mostrarPlatillos(platillos) {
+    const contenido = document.querySelector('#platillos .contenido');
+    platillos.forEach(platillo => {
+        const card = document.createElement('DIV');
+        card.classList.add('row');
+
+        const nombre = document.createElement('DIV');
+        nombre.classList.add('col-md-4');
+        nombre.textContent = `${platillo.nombre}`;
+
+        card.appendChild(nombre);
+        contenido.appendChild(card);
+    })    
 }
