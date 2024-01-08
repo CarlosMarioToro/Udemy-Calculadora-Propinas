@@ -4,6 +4,12 @@ let cliente = {
     pedido: []
 };
 
+const categorias = {
+    1: 'Comida', 
+    2: 'Bebidas', 
+    3: 'Postres'
+}
+
 const btnGuardarClinete = document.querySelector('#guardar-cliente');
 btnGuardarClinete.addEventListener('click', guardarCliente);
 
@@ -60,15 +66,27 @@ function ObtenerPlatillos() {
 
 function mostrarPlatillos(platillos) {
     const contenido = document.querySelector('#platillos .contenido');
+
     platillos.forEach(platillo => {
         const card = document.createElement('DIV');
-        card.classList.add('row');
+        card.classList.add('row', 'py-3', 'border-top');
 
         const nombre = document.createElement('DIV');
         nombre.classList.add('col-md-4');
         nombre.textContent = `${platillo.nombre}`;
+        
+        const precio = document.createElement('DIV');
+        precio.classList.add('col-md-3', 'fw-bold');
+        precio.textContent = `Precio Venta: $${platillo.precio}`;
+
+        const categoria = document.createElement('DIV');
+        categoria.classList.add('col-md-3');
+        categoria.textContent = `Categoria: ${categorias[platillo.categoria]}`;
 
         card.appendChild(nombre);
+        card.appendChild(precio);
+        card.appendChild(categoria);
+
         contenido.appendChild(card);
     })    
 }
